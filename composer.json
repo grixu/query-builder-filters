@@ -1,0 +1,45 @@
+{
+    "name": "grixu/query-builder-filters",
+    "description": "Set of filters for laravel-query-builder (made by Spatie)",
+    "keywords": [
+        "grixu",
+        "query-builder-filters"
+    ],
+    "homepage": "https://github.com/grixu/query-builder-filters",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mateusz Gostański",
+            "email": "mg@grixu.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/database": "^8.0",
+        "spatie/laravel-query-builder": "^3.3.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Grixu\\QueryBuilderFilters\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Grixu\\QueryBuilderFilters\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
