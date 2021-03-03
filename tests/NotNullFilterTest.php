@@ -8,20 +8,49 @@ use Orchestra\Testbench\TestCase;
 
 class NotNullFilterTest extends TestCase
 {
+    protected $query;
+    protected $preSql;
+    protected $obj;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->query = TestModel::query();
+        $this->preSql = $this->query->toSql();
+        $this->obj = new NotNullFilter();
+    }
+
     /** @test */
     public function is_sql_generated()
     {
-        $query = TestModel::query();
+        $obj = $this->obj;
+        $obj($this->query, 'field', '');
 
-        $preSql = $query->toSql();
+        $this->basicAssertions();
+        $this->assertStringContainsString('field', $this->query->toSql());
+    }
 
-        $obj = new NotNullFilter();
-        $obj($query, 'some_flag', 'some_flag');
+    protected function basicAssertions()
+    {
+        $this->assertNotEquals($this->preSql, $this->query->toSql());
+        $this->assertStringContainsString('is not null', $this->query->toSql());
+        $this->assertStringNotContainsString('is null', $this->query->toSql());
+        $this->assertNotEmpty($this->query->getBindings());
+    }
 
-        $this->assertNotEquals($preSql, $query->toSql());
-        $this->assertStringContainsString('some_flag', $query->toSql());
-        $this->assertStringContainsString('is not null', $query->toSql());
-        $this->assertStringNotContainsString('is null', $query->toSql());
-        $this->assertEmpty($query->getBindings());
+    /** @test */
+    public function is_sql_generated_with_many_fields()
+    {
+        $testData = ['field', 'another_field'];
+
+        $obj = $this->obj;
+        $obj($this->query, $testData, '');
+
+        $this->basicAssertions();
+
+        foreach ($testData as $test) {
+            $this->assertStringContainsString($test, $this->query->toSql());
+        }
     }
 }
