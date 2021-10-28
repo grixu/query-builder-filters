@@ -22,7 +22,10 @@
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "friendsofphp/php-cs-fixer": "^3.1",
+        "nunomaduro/larastan": "^0.7.12",
+        "nunomaduro/phpinsights": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -36,8 +39,10 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "cs": "vendor/bin/php-cs-fixer fix",
+        "insights": "vendor/bin/phpinsights",
+        "stan": "vendor/bin/phpstan analyse"
     },
     "config": {
         "sort-packages": true
