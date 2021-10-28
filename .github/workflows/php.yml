@@ -31,14 +31,42 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
-    
+
     - name: Send Slack notification
-      uses: 8398a7/action-slack@v2
+      uses: 8398a7/action-slack@v3.10.0
       if: failure()
       with:
-        status: ${{ job.status }}
-        author_name: ${{ github.actor }}
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: composer run-script test
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check code with PHP Inshights
+      run: vendor/bin/phpinsights -n --ansi --format=github-action
+
+    - name: Check code with PHP Stan
+      run: vendor/bin/phpstan --error-format=github
+
+    - name: Format files
+      run: ./vendor/bin/php-cs-fixer fix
+
+    - name: Commit files to repository
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+          commit_message: "CS Fixer applied [GHA]"
+          commit_user_name: "API-Client GitHub Actions Bot"
+          commit_user_email: "api-client@rywal.dev"
+          commit_author: "API-Client GitHub Actions Bot <api-client@rywal.dev>"
+
+    - name: Send Slack notification
+      uses: 8398a7/action-slack@v3.10.0
+      if: success()
+      with:
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+      env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
