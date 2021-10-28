@@ -29,7 +29,6 @@ class IsNullFilterTest extends TestCase
 
         $this->basicAssertions();
         $this->assertStringContainsString('field', $this->query->toSql());
-
     }
 
     protected function basicAssertions()

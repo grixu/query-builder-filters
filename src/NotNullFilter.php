@@ -10,7 +10,7 @@ class NotNullFilter implements Filter
     public function __invoke(Builder $query, $value, string $property): Builder
     {
         if (is_array($value)) {
-            foreach($value as $v) {
+            foreach ($value as $v) {
                 $query = $this->buildQuery($query, $v);
             }
 

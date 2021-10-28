@@ -10,7 +10,7 @@ class IsNullFilter implements Filter
     public function __invoke(Builder $query, $value, string $property): Builder
     {
         if (is_array($value)) {
-            foreach($value as $v) {
+            foreach ($value as $v) {
                 $query = $this->buildQuery($query, $v);
             }
 
@@ -22,7 +22,7 @@ class IsNullFilter implements Filter
 
     protected function buildQuery($query, $value)
     {
-        return $query->where(function($query) use ($value) {
+        return $query->where(function ($query) use ($value) {
             return $query->orWhereNull($value)
                 ->orWhere($value, '');
         });
