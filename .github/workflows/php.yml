@@ -40,7 +40,7 @@ jobs:
           author_name: ${{ github.actor }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
       env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Check code with PHP Inshights
