@@ -56,9 +56,9 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
           commit_message: "CS Fixer applied [GHA]"
-          commit_user_name: "API-Client GitHub Actions Bot"
-          commit_user_email: "api-client@rywal.dev"
-          commit_author: "API-Client GitHub Actions Bot <api-client@rywal.dev>"
+          commit_user_name: "Query Builder Filters GitHub Actions Bot"
+          commit_user_email: "query-builder-filters@rywal.dev"
+          commit_author: "Query Builder Filters GitHub Actions Bot <query-builder-filters@rywal.dev>"
 
     - name: Send Slack notification
       uses: 8398a7/action-slack@v3.10.0
