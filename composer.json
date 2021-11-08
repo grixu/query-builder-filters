@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3 || ^8.0",
         "illuminate/database": "^8.0",
         "spatie/laravel-query-builder": "^3.3.4 || ^4.0.0"
     },
