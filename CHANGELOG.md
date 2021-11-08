@@ -5,6 +5,7 @@ All notable changes to `query-builder-filters` will be documented in this file
 ## 1.1.1 - 2021-11-08
 - Updated Larastan to `1.0.1`
 - Prepared CI pipeline to change from `master` to `main` as default branch
+- Updated `laravel-query-builder` to `4.0.0`
 
 ## 1.1.0 - 2021-10-28
 
