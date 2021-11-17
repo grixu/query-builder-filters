@@ -2,7 +2,19 @@
 
 All notable changes to `query-builder-filters` will be documented in this file
 
+## 1.2.0 - 2021-11-17
+
+- Added `composer-git-hooks`
+- Configured hooks with auto-install/update
+- Added timeouts in pipelines
+- Added  auto-merge pipeline for small updates made by dependabot
+- Added `x-ray`
+- Added `x-ray` checking in CI pipeline
+- Added `x-ray` checking in git hooks
+- Added `changelog-updater-action` to CD pipeline
+
 ## 1.1.1 - 2021-11-08
+
 - Updated Larastan to `1.0.1`
 - Prepared CI pipeline to change from `master` to `main` as default branch
 - Updated `laravel-query-builder` to `4.0.0`
