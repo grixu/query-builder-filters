@@ -1,0 +1,45 @@
+name: CI/CD
+on:
+  release:
+    types: [ released ]
+  workflow_dispatch:
+
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    name: "CD"
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: shivammathur/setup-php@2.15.0
+        with:
+          php-version: 8.0
+          extensions: mbstring, bcmath, ctype, json, pdo, tokenizer, xml
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit updated files to repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: "main"
+          commit_message: "docs: updated CHANGELOG.md"
+          commit_user_name: "Query Builder Filters GitHub Actions Bot"
+          commit_user_email: "query-builder-filters@rywal.dev"
+          commit_author: "Query Builder Filters GitHub Actions Bot <query-builder-filters@rywal.dev>"
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3.11.0
+        if: success()
+        with:
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
