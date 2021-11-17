@@ -1,0 +1,8 @@
+functions:
+  include:
+    - '*'
+
+paths:
+  include:
+    - 'src'
+    - 'tests'
