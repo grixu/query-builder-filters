@@ -21,11 +21,13 @@
         "spatie/laravel-query-builder": "^3.3.4 || ^4.0.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.3",
+        "brainmaestro/composer-git-hooks": "^2.8",
         "friendsofphp/php-cs-fixer": "^3.1",
         "nunomaduro/larastan": "^0.7.12 || ^1.0.0",
-        "nunomaduro/phpinsights": "^2.0"
+        "nunomaduro/phpinsights": "^2.0",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3",
+        "spatie/x-ray": "^1.1"
     },
     "autoload": {
         "psr-4": {
@@ -42,9 +44,28 @@
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "cs": "vendor/bin/php-cs-fixer fix",
         "insights": "vendor/bin/phpinsights",
-        "stan": "vendor/bin/phpstan analyse"
+        "stan": "vendor/bin/phpstan analyse",
+        "cghooks": "vendor/bin/cghooks",
+        "xray": "vendor/bin/x-ray src"
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "hooks": {
+            "config": {
+                "stop-on-failure": ["pre-commit", "commit-msg"]
+            },
+            "pre-commit": [
+                "export PATH=\"/usr/local/homebrew/bin:$PATH\"",
+                "./vendor/bin/x-ray src",
+                "./vendor/bin/php-cs-fixer fix"
+            ],
+            "commit-msg": "grep -E '^((feat|chore|docs|refactor|fix){1}\\:{1}\\s{1}[a-z]{1}|Merge branch).*' $1",
+            "post-merge": [
+                "export PATH=\"/usr/local/homebrew/bin:$PATH\"",
+                "composer install"
+            ]
+        }
     }
 }
