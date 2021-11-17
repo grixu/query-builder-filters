@@ -61,7 +61,7 @@
                 "./vendor/bin/x-ray src",
                 "./vendor/bin/php-cs-fixer fix"
             ],
-            "commit-msg": "grep -E '^((feat|chore|docs|refactor|fix){1}\\:{1}\\s{1}[a-z]{1}|Merge branch).*' $1",
+            "commit-msg": "grep -E '^(((feat|chore|docs|refactor|fix){1}\\:{1}\\s{1}[a-z]{1})|(Merge\\s?(remote\\-tracking)?\\s?branch)).*' $1",
             "post-merge": [
                 "export PATH=\"/usr/local/homebrew/bin:$PATH\"",
                 "composer install"
