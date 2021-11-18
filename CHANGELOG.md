@@ -2,6 +2,10 @@
 
 All notable changes to `query-builder-filters` will be documented in this file
 
+## 1.2.2 - 2021-11-18
+
+- Fixed auto-merge
+
 ## 1.2.1 - 2021-11-18
 
 - Fixed auto-merging on dependabot's updates
