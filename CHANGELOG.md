@@ -2,6 +2,12 @@
 
 All notable changes to `query-builder-filters` will be documented in this file
 
+## 1.2.1 - 2021-11-18
+
+- Fixed auto-merging on dependabot's updates
+- `commit-msg` regex updated
+- Fixed names of jobs & slack notifications in pipelines
+
 ## 1.2.0 - 2021-11-17
 
 - Added `composer-git-hooks`
