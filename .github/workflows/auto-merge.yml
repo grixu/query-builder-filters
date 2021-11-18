@@ -18,3 +18,25 @@ jobs:
         with:
           target: minor
           github-token: ${{ secrets.DEPENDABOT_TOKEN }}
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3.11.0
+        if: failure()
+        with:
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3.11.0
+        if: success()
+        with:
+          status: ${{ job.status }}
+          author_name: ${{ github.actor }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
