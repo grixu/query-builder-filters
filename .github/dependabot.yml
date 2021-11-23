@@ -7,9 +7,9 @@ updates:
     time: '00:00'
   open-pull-requests-limit: 20
   reviewers:
-    - grixu
+    - mateuszskrobis
   assignees:
-    - grixu
+    - mateuszskrobis
   commit-message:
     prefix: fix
     prefix-development: chore
@@ -21,9 +21,9 @@ updates:
     time: '00:00'
   open-pull-requests-limit: 10
   reviewers:
-    - grixu
+    - mateuszskrobis
   assignees:
-    - grixu
+    - mateuszskrobis
   commit-message:
     prefix: fix
     prefix-development: chore
