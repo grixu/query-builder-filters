@@ -34,7 +34,7 @@ jobs:
           commit_author: "Query Builder Filters GitHub Actions Bot <query-builder-filters@rywal.dev>"
 
       - name: Send Slack notification
-        uses: 8398a7/action-slack@v3.13.0
+        uses: 8398a7/action-slack@v3.15.0
         if: success()
         with:
           status: ${{ job.status }}
